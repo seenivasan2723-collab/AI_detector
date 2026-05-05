@@ -4,7 +4,7 @@ import os
 
 # 1. UI Configuration
 st.set_page_config(page_title="AI Detector")
-st.title(" AI vs Human Image Detector")
+st.title(" deepfake ai image detector")
 
 # 2. Image Upload
 uploaded_file = st.file_uploader("Upload Image", type=["jpg", "jpeg", "png"])
