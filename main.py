@@ -4,7 +4,7 @@ import os
 
 # 1. UI Configuration
 st.set_page_config(page_title="Deep fake Ai image detector", page_icon="")
-st.title(" AI vs Human Image Detector")
+st.title("Deep Fake AI Image detector")
 st.info("This system analyzes Metadata and Pixel Compression (ELA) to detect AI generation.")
 
 # 2. Image Upload Section
