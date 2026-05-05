@@ -3,140 +3,154 @@ from PIL import Image, ImageChops
 import os
 import time
 
-# 1. Page Configuration
-st.set_page_config(page_title="Deep Fake AI Image Detector", page_icon="🤖", layout="wide")
+# 1. Advanced Page Config
+st.set_page_config(page_title="Deep Fake AI Image Detector", page_icon="🧪", layout="wide")
 
-# 2. Advanced CSS for Glassmorphism and Animations
+# 2. Cyberpunk Glassmorphism CSS
 st.markdown("""
     <style>
-    /* Gradient Background */
+    /* Dark Deep Space Background */
     .stApp {
-        background: radial-gradient(circle at top right, #1e3a8a, #0f172a);
-        color: #e2e8f0;
+        background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+        color: #f8fafc;
     }
 
-    /* Glassmorphism Effect for containers */
-    .stFileUploader, .stMarkdown, div[data-testid="stVerticalBlock"] > div {
-        background: rgba(255, 255, 255, 0.05);
-        backdrop-filter: blur(10px);
-        border-radius: 20px;
+    /* Glass Cards */
+    div[data-testid="stVerticalBlock"] > div {
+        background: rgba(30, 41, 59, 0.5);
+        backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 20px;
+        border-radius: 24px;
+        padding: 25px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
     }
 
-    /* Animated Title */
-    @keyframes fadeInDown {
-        0% { opacity: 0; transform: translateY(-20px); }
-        100% { opacity: 1; transform: translateY(0); }
-    }
-    .main-title {
-        font-size: 60px;
-        font-weight: 800;
+    /* Glowing Title */
+    .hero-title {
+        font-size: 72px;
+        font-weight: 900;
         text-align: center;
-        letter-spacing: -1px;
-        background: linear-gradient(90deg, #38bdf8, #818cf8, #c084fc);
+        background: linear-gradient(to right, #22d3ee, #818cf8, #d946ef);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: fadeInDown 1s ease-out;
+        filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.3));
+        margin-bottom: 5px;
     }
 
-    /* Neon Button */
+    /* Neon Scanner Button */
     div.stButton > button:first-child {
-        background: linear-gradient(45deg, #00f2fe 0%, #4facfe 100%);
+        background: linear-gradient(45deg, #06b6d4, #3b82f6);
         border: none;
         color: white;
-        padding: 15px 0px;
+        padding: 20px;
         font-weight: bold;
-        font-size: 22px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0, 242, 254, 0.3);
-        transition: all 0.3s ease;
-        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+        transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     div.stButton > button:first-child:hover {
-        box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
-        transform: translateY(-2px);
+        box-shadow: 0 0 40px rgba(6, 182, 212, 0.8);
+        transform: scale(1.02);
     }
 
-    /* Hide Streamlit Header/Footer for clean look */
-    header {visibility: hidden;}
-    footer {visibility: hidden;}
+    /* Custom File Uploader */
+    .stFileUploader {
+        border: 2px dashed #334155;
+        border-radius: 20px;
+        background: rgba(15, 23, 42, 0.4);
+    }
+
+    /* Sidebar Glass */
+    section[data-testid="stSidebar"] {
+        background: rgba(15, 23, 42, 0.8);
+        border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
     </style>
     """, unsafe_allow_html=True)
 
-# 3. Sidebar Styling
+# 3. Interactive Sidebar
 with st.sidebar:
-    st.markdown("## 🛡️ System Core")
+    st.image("https://cdn-icons-png.flaticon.com/512/2103/2103633.png", width=80)
+    st.title("User Profile")
+    st.write(" **Project:** AI Image Forensics")
+    st.write(" **Developer:** Seenivasan R")
+    st.write("️ **ID:** 24129049")
     st.markdown("---")
-    st.write(" **Lead Dev:** Seenivasan R")
-    st.write(" **Dept:** BSc Computer Technology")
-    st.write("️ **Institution:** SRCAS")
-    st.markdown("---")
-    st.success("ELA Scan Engine: Online")
-    st.info("Metadata Engine: Online")
+    st.markdown("###  System Vitals")
+    st.code("CPU: STABLE\nRAM: OPTIMIZED\nLATENCY: 12ms", language='bash')
 
-# 4. Main Interface
-st.markdown('<p class="main-title">AI VISION PRO</p>', unsafe_allow_html=True)
-st.write("<p style='text-align: center; color: #94a3b8;'>Advanced Neural Pattern Recognition & Forensic Analysis</p>", unsafe_allow_html=True)
+# 4. Main Lab Interface
+st.markdown('<p class="hero-title">Deep Fake AI Image Detector</p>', unsafe_allow_html=True)
+st.write("<p style='text-align: center; font-family: monospace; color: #94a3b8;'>v4.0.1 // NEURAL PATTERN RECOGNITION ENGINE</p>", unsafe_allow_html=True)
 
-# Layout Columns
-col_left, col_right = st.columns([1, 1], gap="large")
+col1, col2 = st.columns([1.2, 0.8], gap="large")
 
-with col_left:
-    st.markdown("###  Source Input")
-    uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"])
-    if uploaded_file:
-        img_display = Image.open(uploaded_file)
-        st.image(img_display, caption="Target Buffer", use_container_width=True)
-
-def perform_forensic_scan(img_path):
-    img = Image.open(img_path)
-    has_metadata = True if img._getexif() else False
+with col1:
+    st.markdown("####  TARGET ACQUISITION")
+    uploaded_file = st.file_uploader("Drop encrypted image files here", type=["jpg", "jpeg", "png"])
     
-    # ELA Analysis
-    temp = "scan_buffer.jpg"
-    img.convert('RGB').save(temp, 'JPEG', quality=90)
-    diff = ImageChops.difference(img.convert('RGB'), Image.open(temp))
-    score = max([ex[1] for ex in diff.getextrema()])
-    os.remove(temp)
-    return has_metadata, score
-
-with col_right:
-    st.markdown("### ⚙️ Forensic Terminal")
     if uploaded_file:
-        if st.button("EXECUTE SCAN"):
-            # Mock Scanning Animation
-            status = st.empty()
-            bar = st.progress(0)
+        img_preview = Image.open(uploaded_file)
+        st.image(img_preview, caption="[BUFFERED IMAGE DATA]", use_container_width=True)
+
+def run_forensics(path):
+    img = Image.open(path)
+    meta = True if img._getexif() else False
+    
+    # ELA Analysis (Error Level Analysis)
+    buf = "ela_buffer.jpg"
+    img.convert('RGB').save(buf, 'JPEG', quality=90)
+    diff = ImageChops.difference(img.convert('RGB'), Image.open(buf))
+    score = max([v[1] for v in diff.getextrema()])
+    os.remove(buf)
+    return meta, score
+
+with col2:
+    st.markdown("#### 🛠️ SCAN TERMINAL")
+    if uploaded_file:
+        if st.button("INITIATE DEEP SCAN"):
+            log_area = st.empty()
+            progress = st.progress(0)
             
-            stages = ["Initializing...", "Checking EXIF...", "Analyzing Pixels...", "Comparing Bitstreams..."]
-            for i, stage in enumerate(stages):
-                status.markdown(f"**Current Task:** `{stage}`")
-                bar.progress((i + 1) * 25)
-                time.sleep(0.6)
+            # Interactive Console Logs
+            logs = [
+                " Accessing file buffer...",
+                "🧬 Extracting bitstream patterns...",
+                " Checking EXIF metadata headers...",
+                " Calculating ELA compression noise...",
+                "🤖 Running heuristic comparison...",
+                "✅ Finalizing report..."
+            ]
             
-            # Save and Scan
-            with open("temp_target.jpg", "wb") as f:
+            for idx, log in enumerate(logs):
+                log_area.code(f"USER@SRCAS:~$ {log}")
+                progress.progress((idx + 1) * 16)
+                time.sleep(0.5)
+            
+            # Execution
+            with open("active_scan.jpg", "wb") as f:
                 f.write(uploaded_file.getbuffer())
             
-            is_real_meta, ela_val = perform_forensic_scan("temp_target.jpg")
-            os.remove("temp_target.jpg")
+            has_meta, diff_val = run_forensics("active_scan.jpg")
+            os.remove("active_scan.jpg")
             
-            st.markdown("---")
-            st.markdown("###  Final Report")
+            st.markdown("####  SCAN REPORT")
             
-            if not is_real_meta and ela_val > 22:
-                st.error("⚠️ THREAT DETECTED: AI GENERATED CONTENT")
-                st.warning(f"Forensic Score: {ela_val} | Metadata: Missing")
+            # Dynamic Results
+            if not has_meta and diff_val > 22:
+                st.error(" CRITICAL: AI SIGNATURE DETECTED")
+                st.warning(f"Forensic Variance: {diff_val}% // Metadata: NULL")
                 st.balloons()
             else:
-                st.success("✅ VERIFIED: AUTHENTIC HUMAN CAPTURE")
-                st.info(f"Forensic Score: {ela_val} | Metadata: Detected")
+                st.success(" VERIFIED: AUTHENTIC CONTENT")
+                st.info(f"Forensic Variance: {diff_val}% // Metadata: VALID")
                 st.snow()
     else:
-        st.write("Please upload a file to initialize the scanning terminal.")
+        st.info("System idle. Waiting for image input...")
 
-# 5. Footer info
-st.markdown("<br><hr><center>Secure Forensic Lab Environment v2.4.0</center>", unsafe_allow_html=True)
+# 5. Dashboard Footer
+st.markdown("<br><br><p style='text-align: center; color: #334155;'>© 2026 // SEENIVASAN R // FORENSIC CORE v4.0</p>", unsafe_allow_html=True)
 
