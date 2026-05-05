@@ -114,9 +114,8 @@ if uploaded_file is not None:
             if not has_meta and score > 20:
                 st.error(" RESULT: AI GENERATED IMAGE")
                 st.write("**Reasoning:** The image lacks standard camera metadata and shows high synthetic compression levels.")
-                st.balloons() 
             else:
                 st.success("✅ RESULT: REAL HUMAN IMAGE")
                 st.write("**Reasoning:** Digital signatures and pixel distribution match natural camera capturing patterns.")
-                st.snow()
+                
 
