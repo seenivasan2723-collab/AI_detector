@@ -61,7 +61,7 @@ with st.sidebar:
     st.info("System uses Metadata Analysis and Error Level Analysis (ELA) to identify synthetic pixel patterns.")
 
 # 3. Home Page Content
-st.markdown('<p class="main-title"> DeepFakeAI Image Detector</p>', unsafe_allow_html=True)
+st.markdown('<p class="main-title"> DeepFake AI Image Detector</p>', unsafe_allow_html=True)
 
 uploaded_file = st.file_uploader("Drop your image here or browse", type=["jpg", "jpeg", "png"])
 
