@@ -4,7 +4,7 @@ import os
 import time
 
 # 1. Page Configuration and CSS Styling
-st.set_page_config(page_title="AI Image Detector", page_icon="", layout="wide")
+st.set_page_config(page_title="DeepFake AI Image Detecor", page_icon="", layout="wide")
 
 st.markdown("""
     <style>
