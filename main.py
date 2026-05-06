@@ -6,7 +6,7 @@ st.title(" Deepfake AI Image Detector")
 st.info("This system analyzes image Metadata and Pixel Compression (ELA) to detect AI generation.")
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
-def analyze_image(img_path)
+def analyze_image(img_path):
     # Metadata Check (EXIF Data)
     img = Image.open(img_path)
     has_metadata = True if img._getexif() else False
